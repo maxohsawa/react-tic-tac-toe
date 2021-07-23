@@ -48,32 +48,30 @@ const Board = () => {
     }
       
     return (
-      <div
-        className="game-board"
-        onClick={(e) => {
-          setPlayer((player + 1) % 2);
-          status = `Player ${player}`;
-        }}
-      >
-      <div className="grid-row">
-        {renderSquare(0)}
-        {renderSquare(1)}
-        {renderSquare(2)}
-      </div>
-      <div className="grid-row">
-        {renderSquare(3)}
-        {renderSquare(4)}
-        {renderSquare(5)}
-      </div>
-      <div className="grid-row">
-        {renderSquare(6)}
-        {renderSquare(7)}
-        {renderSquare(8)}
-      </div>
-        <div id="info">
-          <h1>{status}</h1>
+        <div
+            className="game-board"
+            onClick={(e) => {
+            setPlayer((player + 1) % 2);
+            status = `Player ${player}`;
+            }}
+        >
+        
+        {[0,1,2].map((rowElem) => {
+            return(
+                <div className="grid-row" id={`row ${rowElem}`}>
+                    {[0,1,2].map( (sqElem) => {
+                        return (
+                            <Square id={(rowElem * 3) + sqElem} player={player} newState={newState}/>
+                        )
+                    })}
+                </div>
+            )
+        })}
+
+            <div id="info">
+            <h1>{status}</h1>
+            </div>
         </div>
-      </div>
     );
   };
 
